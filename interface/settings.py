@@ -43,8 +43,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api.apps.ApiConfig'
 ]
-
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata'
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -85,7 +94,7 @@ DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.mysql',
           'NAME': 'dev',
-          'USER':'root',
+          'USER':'test',
           'PASSWORD':'Meiyoumima',
           'HOST':'localhost',
           'PORT':'3306',
@@ -130,8 +139,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(os.path.dirname(PROJECT_PATH), 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
+    ("css", os.path.join(STATIC_ROOT, 'css')),
+    ("js", os.path.join(STATIC_ROOT, 'js')),
+    ('images',os.path.join(STATIC_ROOT,'images')),
+    
     
 )
