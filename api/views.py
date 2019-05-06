@@ -37,9 +37,9 @@ def images(request):
         # abc = type(file)
         # abc = str(abc)
         if imageVar > 1000:
-            return HttpResponse('图片清晰')
+            return HttpResponse('图片清晰'+str(imageVar))
         else:
-            return HttpResponse('图片不清晰，请再上传一次')
+            return HttpResponse('图片不清晰，请再上传一次'+str(imageVar))
     except KeyError:
         # return Response({'data':'not found'})
         return HttpResponse('没有上传图片')
