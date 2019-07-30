@@ -45,8 +45,11 @@ def images(request):
             # pic = request.FILES['file']
             im_pic = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
             # im_bar = cv2.imread(request.FILES['file'],0)
-            barcode = pyzbar.decode(im_pic)
-            url = barcode[0].data.decode('utf-8')
+            try:
+                barcode = pyzbar.decode(im_pic)
+                url = barcode[0].data.decode('utf-8')
+            except:
+                pass
             # image = cv2.imread(file)
             # im_pic = Image.open(pic)
             img2gray = cv2.cvtColor(im_pic, cv2.COLOR_BGR2GRAY)
